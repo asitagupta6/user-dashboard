@@ -1,5 +1,5 @@
 {
-  "buildCommand": "npm install && npx ng build",
+  "buildCommand": "npm install && chmod +x node_modules/.bin/ng && npx ng build",
   "outputDirectory": "dist/user-dashboard/browser",
   "installCommand": "npm install"
 }
