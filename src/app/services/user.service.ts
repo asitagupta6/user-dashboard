@@ -10,22 +10,22 @@ export class UserService {
   private readonly _users$ = new BehaviorSubject<User[]>([
     {
       id: uuidv4(),
-      name: 'Alice Johnson',
-      email: 'alice@example.com',
+      name: 'Asita Gupta',
+      email: 'asita0602@gmail.com',
       role: 'Admin',
       createdAt: new Date(),
     },
     {
       id: uuidv4(),
-      name: 'Bob Smith',
-      email: 'bob@example.com',
+      name: 'Abhay Gupta',
+      email: 'abhaygupta20@gmail.com',
       role: 'Editor',
       createdAt: new Date(),
     },
     {
       id: uuidv4(),
-      name: 'Carol White',
-      email: 'carol@example.com',
+      name: 'Chayan Kesarwani',
+      email: 'chayankumar08@gmail.com',
       role: 'Viewer',
       createdAt: new Date(),
     },
