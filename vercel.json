@@ -1,0 +1,5 @@
+{
+  "buildCommand": "npm install && npx ng build",
+  "outputDirectory": "dist/user-dashboard/browser",
+  "installCommand": "npm install"
+}
