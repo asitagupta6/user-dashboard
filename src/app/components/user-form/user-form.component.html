@@ -1,0 +1,130 @@
+<div class="modal-overlay" (click)="onOverlayClick($event)">
+  <div class="modal-container" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <!-- Header -->
+    <div class="modal-header">
+      <div class="header-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+      </div>
+      <h2 id="modal-title" class="modal-title">Add New User</h2>
+      <button class="close-btn" (click)="closeModal()" aria-label="Close modal">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Form -->
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()" novalidate class="modal-form">
+
+      <!-- Name Field -->
+      <div class="form-group" [class.error]="isFieldInvalid('name')">
+        <label for="name" class="form-label">
+          Full Name <span class="required">*</span>
+        </label>
+        <div class="input-wrapper">
+          <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+          <input
+            id="name"
+            type="text"
+            formControlName="name"
+            placeholder="e.g. Jane Doe"
+            class="form-input"
+            autocomplete="off"
+          />
+        </div>
+        <div class="error-msg" *ngIf="isFieldInvalid('name')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          <span *ngIf="userForm.get('name')?.errors?.['required']">Name is required.</span>
+          <span *ngIf="userForm.get('name')?.errors?.['minlength']">Minimum 2 characters required.</span>
+          <span *ngIf="userForm.get('name')?.errors?.['maxlength']">Maximum 50 characters allowed.</span>
+        </div>
+      </div>
+
+      <!-- Email Field -->
+      <div class="form-group" [class.error]="isFieldInvalid('email')">
+        <label for="email" class="form-label">
+          Email Address <span class="required">*</span>
+        </label>
+        <div class="input-wrapper">
+          <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+          <input
+            id="email"
+            type="email"
+            formControlName="email"
+            placeholder="e.g. jane@company.com"
+            class="form-input"
+            autocomplete="off"
+          />
+        </div>
+        <div class="error-msg" *ngIf="isFieldInvalid('email')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          <span *ngIf="userForm.get('email')?.errors?.['required']">Email is required.</span>
+          <span *ngIf="userForm.get('email')?.errors?.['email']">Please enter a valid email address.</span>
+        </div>
+      </div>
+
+      <!-- Role Field -->
+      <div class="form-group" [class.error]="isFieldInvalid('role')">
+        <label for="role" class="form-label">
+          Role <span class="required">*</span>
+        </label>
+        <div class="input-wrapper select-wrapper">
+          <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+          <select id="role" formControlName="role" class="form-input form-select">
+            <option value="" disabled selected>Select a role...</option>
+            <option value="Admin">Admin</option>
+            <option value="Editor">Editor</option>
+            <option value="Viewer">Viewer</option>
+          </select>
+          <svg class="select-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </div>
+        <div class="error-msg" *ngIf="isFieldInvalid('role')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          <span>Please select a role.</span>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="modal-actions">
+        <button type="button" class="btn btn-cancel" (click)="closeModal()">
+          Cancel
+        </button>
+        <button type="submit" class="btn btn-submit" [disabled]="isSubmitting">
+          <span *ngIf="!isSubmitting" class="btn-content">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+            Add User
+          </span>
+          <span *ngIf="isSubmitting" class="btn-content">
+            <span class="spinner"></span>
+            Adding...
+          </span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
